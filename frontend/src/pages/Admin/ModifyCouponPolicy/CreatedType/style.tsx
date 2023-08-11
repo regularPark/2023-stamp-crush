@@ -14,7 +14,7 @@ export const Label = styled.label`
   }
   &:first-of-type {
     margin-right: 50px;
-    background: #ffeefd;
+    background: ${({ theme }) => theme.colors.point};
   }
 `;
 

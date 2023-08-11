@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { Logo } from '../../assets';
 import { Option } from '../../types';
 import {
+  CharacterImage,
   LabelContent,
   LogoHeader,
   LogoImg,
@@ -19,6 +20,7 @@ import {
   PiBookOpenTextLight,
   PiGiftLight,
 } from 'react-icons/pi';
+import Character from '../../assets/cafe_pic.png';
 
 const SIDEBAR_ICONS = [
   <PiUserListLight size={26} key="customer-list" />,
@@ -98,6 +100,7 @@ const SideBar = ({ width, height, options }: SideBarProps) => {
           </SideBarContent>
         ))}
       </SideBarContainer>
+      <CharacterImage src={Character} />
     </>
   );
 };

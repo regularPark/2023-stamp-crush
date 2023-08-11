@@ -62,7 +62,7 @@ export const LabelContent = styled.span<SideBarStyleProps>`
   justify-content: flex-start;
   width: ${(props) => `${props.$width}px`};
   height: ${(props) => `${props.$height}px`};
-  font-size: 18px;
+  font-size: 16px;
   font-weight: ${(props) => (props.$isSelected ? '600' : '400')};
   color: ${({ theme, $isSelected }) => ($isSelected ? `${theme.colors.text}` : 'white')};
 
@@ -89,4 +89,12 @@ export const ImageWrapper = styled.div`
   position: absolute;
   bottom: 10px;
   left: 20px;
+`;
+
+export const CharacterImage = styled.img`
+  position: absolute;
+  width: 250px;
+  height: 200px;
+  bottom: 0;
+  left: 0;
 `;
