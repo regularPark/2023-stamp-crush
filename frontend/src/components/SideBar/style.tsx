@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface SideBarStyleProps {
   $width: number;
@@ -39,19 +39,22 @@ export const PageSideBarWrapper = styled.div`
 export const SideBarContainer = styled.div<SideBarContainerStyleProps>`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 
   width: ${(props) => `${props.$width}px`};
   height: ${(props) => `${props.$height}px`};
 
   background: ${({ theme }) => `linear-gradient(to right, ${theme.colors.main} 20%, white 80%)`};
 
+  div:first-child span {
+    cursor: default;
+  }
+
   div:nth-child(${(props) => props.$prevIndex}) {
-    border-radius: 0 0 40px 0;
+    border-radius: 0 0 50px 0;
   }
 
   div:nth-child(${(props) => props.$nextIndex}) {
-    border-radius: 0 40px 0 0;
+    border-radius: 0 50px 0 0;
   }
 `;
 

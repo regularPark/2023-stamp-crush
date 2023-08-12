@@ -23,6 +23,7 @@ import {
 import Character from '../../assets/cafe_pic.png';
 
 const SIDEBAR_ICONS = [
+  <></>,
   <PiUserListLight size={26} key="customer-list" />,
   <PiBuildingsLight size={26} key="manage-cafe" />,
   <PiBookOpenTextLight size={26} key="modify-coupon-policy" />,
@@ -80,25 +81,32 @@ const SideBar = ({ width, height, options }: SideBarProps) => {
         $prevIndex={currentIndex - 1}
         $nextIndex={currentIndex + 1}
       >
-        {options.map(({ key, value }, index) => (
-          <SideBarContent
-            key={key}
-            $isSelected={value === current || (checkDesignCoupon(value) && isDesignCoupon)}
-            $currentIndex={index + 1}
-          >
-            <SideBarLink to={value}>
-              <LabelContent
-                $isSelected={value === current || (checkDesignCoupon(value) && isDesignCoupon)}
-                $width={width}
-                $height={height / options.length}
-                onClick={() => setCurrentIndex(index + 1)}
-              >
-                {SIDEBAR_ICONS[index]}
-                {key}
-              </LabelContent>
-            </SideBarLink>
-          </SideBarContent>
-        ))}
+        {options.map(({ key, value }, index) => {
+          return (
+            <SideBarContent
+              key={key}
+              $isSelected={value === current || (checkDesignCoupon(value) && isDesignCoupon)}
+              $currentIndex={index + 1}
+            >
+              <SideBarLink to={value}>
+                <LabelContent
+                  $isSelected={value === current || (checkDesignCoupon(value) && isDesignCoupon)}
+                  $width={width}
+                  $height={height / options.length}
+                  onClick={() => {
+                    if (index === 0) {
+                      return;
+                    }
+                    setCurrentIndex(index + 1);
+                  }}
+                >
+                  {SIDEBAR_ICONS[index]}
+                  {key}
+                </LabelContent>
+              </SideBarLink>
+            </SideBarContent>
+          );
+        })}
       </SideBarContainer>
       <CharacterImage src={Character} />
     </>
