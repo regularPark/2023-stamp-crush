@@ -1,6 +1,7 @@
 import { BaseInput, Container, SearchButton } from './style';
 import { BsSearch } from 'react-icons/bs';
 import { ChangeEvent, FormEvent, InputHTMLAttributes } from 'react';
+import { theme } from '../../style/theme';
 
 export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   searchWord: string;
@@ -21,7 +22,7 @@ const SearchBar = ({ searchWord, setSearchWord, onClick, ...props }: SearchBarPr
     <Container onSubmit={handleForm}>
       <BaseInput value={searchWord} onChange={search} {...props} />
       <SearchButton type="submit" onClick={onClick}>
-        <BsSearch color="white" />
+        <BsSearch color={theme.colors.point} size={20} />
       </SearchButton>
     </Container>
   );
