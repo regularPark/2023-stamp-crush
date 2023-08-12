@@ -18,6 +18,7 @@ import { getCustomers } from '../../../api/get';
 import { CUSTOMERS_ORDER_OPTIONS } from '../../../constants';
 import { Customer } from '../../../types';
 import { CustomersRes } from '../../../types/api';
+import { formatDate } from '../../../utils';
 
 const CustomerList = () => {
   const [searchWord, setSearchWord] = useState('');
@@ -93,7 +94,7 @@ const CustomerList = () => {
             </LeftInfo>
             <RightInfo>
               <InfoContainer>
-                첫 방문일: {firstVisitDate}
+                첫 방문일: {formatDate(firstVisitDate)}
                 <br /> 방문 횟수: {visitCount}번
               </InfoContainer>
             </RightInfo>
