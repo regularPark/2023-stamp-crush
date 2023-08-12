@@ -107,6 +107,7 @@ const ManageCafe = () => {
       cafeImageUrl: cafeImage === '' ? 'https://picsum.photos/200/300' : cafeImage,
       introduction: introduction,
     };
+    if (!confirm('현재 입력된 정보를 저장하시겠습니까?')) return;
 
     mutate({
       params: {
@@ -192,7 +193,7 @@ const ManageCafe = () => {
           <PreviewContentContainer>
             <Text>
               <FaRegClock size={25} />
-              {`여는 시간 ${parseTime(openTime)}\n닫는 시간 ${parseTime(closeTime)}`}
+              {`${parseTime(openTime)} - ${parseTime(closeTime)}`}
             </Text>
             <Text>
               <FaPhoneAlt size={25} />
