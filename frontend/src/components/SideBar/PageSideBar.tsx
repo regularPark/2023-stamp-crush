@@ -4,13 +4,14 @@ import { ROUTER_PATH } from '../../constants';
 import { Option } from '../../types';
 import { PageSideBarWrapper } from './style';
 
-const SIDE_BAR_OPTIONS: Option[] = [
-  { key: '', value: '#' },
+export const SIDE_BAR_OPTIONS: Option[] = [
+  { key: '', value: '' },
   { key: '내 고객 목록', value: ROUTER_PATH.customerList },
   { key: '내 카페 관리', value: ROUTER_PATH.manageCafe },
   { key: '쿠폰 제작 및 변경', value: ROUTER_PATH.modifyCouponPolicy },
   { key: '스탬프 적립', value: ROUTER_PATH.enterStamp },
   { key: '리워드 사용', value: ROUTER_PATH.enterReward },
+  { key: '', value: '' },
 ];
 
 const PageSideBar = () => {
@@ -20,7 +21,7 @@ const PageSideBar = () => {
 
   return (
     <PageSideBarWrapper>
-      <SideBar options={SIDE_BAR_OPTIONS} width={240} height={280} />
+      <SideBar options={SIDE_BAR_OPTIONS} width={240} height={300} />
     </PageSideBarWrapper>
   );
 };

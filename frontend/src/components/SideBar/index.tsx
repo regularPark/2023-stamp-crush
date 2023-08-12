@@ -3,6 +3,7 @@ import { Logo } from '../../assets';
 import { Option } from '../../types';
 import {
   CharacterImage,
+  EmptyContent,
   LabelContent,
   LogoHeader,
   LogoImg,
@@ -43,29 +44,44 @@ const SideBar = ({ width, height, options }: SideBarProps) => {
     options.findIndex((option) => option.value === current) + 1,
   );
   const [isDesignCoupon, setIsDesignCoupon] = useState(false);
+  const [isEarnStamp, setIsEarnStamp] = useState(false);
+  const [isUseReward, setIsUseReward] = useState(false);
 
   const modifyPolicyCouponRoute = ROUTER_PATH.modifyCouponPolicy;
   const designCouponRoutes = [ROUTER_PATH.templateCouponDesign, ROUTER_PATH.customCouponDesign];
 
-  useEffect(() => {
-    setIsDesignCoupon(false);
+  const enterStamp = ROUTER_PATH.enterStamp;
+  const stampRoutes = [ROUTER_PATH.selectCoupon, ROUTER_PATH.earnStamp];
 
+  const enterReward = ROUTER_PATH.enterReward;
+  const rewardRoutes = [ROUTER_PATH.useReward];
+
+  useEffect(() => {
     const foundIndex = options.findIndex(({ value }) => {
-      if (checkDesignCoupon(value)) {
+      if (checkIncludeRoute(value, modifyPolicyCouponRoute, designCouponRoutes)) {
         setIsDesignCoupon(true);
         return true;
       }
+
+      if (checkIncludeRoute(value, enterStamp, stampRoutes)) {
+        setIsEarnStamp(true);
+        return true;
+      }
+
+      if (checkIncludeRoute(value, enterReward, rewardRoutes)) {
+        setIsUseReward(true);
+        return true;
+      }
+
       return value === current;
     });
 
     setCurrentIndex(foundIndex + 1);
   }, [current, options]);
 
-  const checkDesignCoupon = (value: string) => {
-    return (
-      value === modifyPolicyCouponRoute &&
-      designCouponRoutes.some((route) => current.includes(route))
-    );
+  const checkIncludeRoute = (value: string, route: string, routes: string[]) => {
+    if (value !== route) return false;
+    return routes.some((route) => current.includes(route));
   };
 
   return (
@@ -82,19 +98,33 @@ const SideBar = ({ width, height, options }: SideBarProps) => {
         $nextIndex={currentIndex + 1}
       >
         {options.map(({ key, value }, index) => {
+          if (index === 0 || index === options.length - 1)
+            return <EmptyContent $width={width} $height={height} />;
           return (
             <SideBarContent
               key={key}
-              $isSelected={value === current || (checkDesignCoupon(value) && isDesignCoupon)}
+              $isSelected={
+                value === current ||
+                (checkIncludeRoute(value, modifyPolicyCouponRoute, designCouponRoutes) &&
+                  isDesignCoupon) ||
+                (checkIncludeRoute(value, enterStamp, stampRoutes) && isEarnStamp) ||
+                (checkIncludeRoute(value, enterReward, rewardRoutes) && isUseReward)
+              }
               $currentIndex={index + 1}
             >
               <SideBarLink to={value}>
                 <LabelContent
-                  $isSelected={value === current || (checkDesignCoupon(value) && isDesignCoupon)}
+                  $isSelected={
+                    value === current ||
+                    (checkIncludeRoute(value, modifyPolicyCouponRoute, designCouponRoutes) &&
+                      isDesignCoupon) ||
+                    (checkIncludeRoute(value, enterStamp, stampRoutes) && isEarnStamp) ||
+                    (checkIncludeRoute(value, enterReward, rewardRoutes) && isUseReward)
+                  }
                   $width={width}
                   $height={height / options.length}
                   onClick={() => {
-                    if (index === 0) {
+                    if (index === 0 || index === options.length - 1) {
                       return;
                     }
                     setCurrentIndex(index + 1);

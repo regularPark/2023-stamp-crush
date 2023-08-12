@@ -45,10 +45,6 @@ export const SideBarContainer = styled.div<SideBarContainerStyleProps>`
 
   background: ${({ theme }) => `linear-gradient(to right, ${theme.colors.main} 20%, white 80%)`};
 
-  div:first-child span {
-    cursor: default;
-  }
-
   div:nth-child(${(props) => props.$prevIndex}) {
     border-radius: 0 0 50px 0;
   }
@@ -100,4 +96,10 @@ export const CharacterImage = styled.img`
   height: 200px;
   bottom: 0;
   left: 0;
+`;
+
+export const EmptyContent = styled.div<{ $width: number; $height: number }>`
+  width: ${({ $width }) => $width}px;
+  height: ${({ $height }) => $height}px;
+  background: ${({ theme }) => theme.colors.main};
 `;
